@@ -1,5 +1,7 @@
 ## AlphaPlayer
 
+原demo不能直接跑出效果，fork过来修改了一下，准备补充api做后续的开发。后来发现[企鹅电竞的VPA](https://github.com/Tencent/vap)方案更完善
+
 > Powered by ByteDance Live Android team.
 
 AlphaPlayer是直播中台使用的一个视频动画特效SDK，可以通过制作Alpha通道分离的视频素材，再在客户端上通过OpenGL ES重新实现Alpha通道和RGB通道的混合，从而实现在端上播放带透明通道的视频。
