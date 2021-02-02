@@ -1,14 +1,15 @@
 package com.ss.ugc.android.alphavideoplayer
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.ss.ugc.android.alpha_player.IMonitor
 import com.ss.ugc.android.alpha_player.IPlayerAction
 import com.ss.ugc.android.alpha_player.model.ScaleType
+import com.ss.ugc.android.alphavideoplayer.utils.AssetsUtils
 import com.ss.ugc.android.alphavideoplayer.utils.PermissionUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
@@ -67,19 +68,28 @@ class MainActivity : AppCompatActivity() {
 
     fun playGift(v: View) {
         val testPath = getResourcePath()
-        Log.i("dzy", "play gift file path : $testPath")
+        Log.i(TAG, "play gift file path : $testPath")
         if ("".equals(testPath)) {
             Toast.makeText(this, "please run 'gift_install.sh gift/demoRes' for load alphaVideo resource.", Toast.LENGTH_SHORT)
                 .show()
         }
         video_gift_view.startVideoGift(testPath)
     }
+    fun loadResource(v: View){
+        val dirPath = basePath + File.separator + "alphaVideoGift" + File.separator
+
+        AssetsUtils.copyDirFromAssets(
+            this, "demoRes",
+            dirPath)
+
+    }
 
     private fun getResourcePath(): String {
         val dirPath = basePath + File.separator + "alphaVideoGift" + File.separator
         val dirFile = File(dirPath)
         if (dirFile.exists() && dirFile.listFiles() != null && dirFile.listFiles().isNotEmpty()) {
-            return dirFile.listFiles()[0].absolutePath
+//            return dirFile.listFiles()[0].absolutePath
+            return dirFile.absolutePath
         }
         return ""
     }
